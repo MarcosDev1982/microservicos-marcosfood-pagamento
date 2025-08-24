@@ -1,62 +1,83 @@
-# marcosfood-micoservice-pagamento
+# 💳 Microserviço de Pagamento — MarcosFood
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+Este microserviço é responsável por gerenciar os pagamentos realizados na plataforma **MarcosFood**, oferecendo
+endpoints REST para criação, consulta, atualização e exclusão de transações.
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+---
 
-## Running the application in dev mode
+## 🚀 Tecnologias Utilizadas
 
-You can run your application in dev mode that enables live coding using:
+- **Quarkus 3.25.4**
+- **Java 21**
+- **Jakarta REST (JAX-RS)**
+- **Hibernate ORM Panache**
+- **PostgreSQL**
+- **ModelMapper**
+- **Lombok**
+- **MicroProfile OpenAPI**
+- **Docker (via quarkus-container-image-docker)**
 
-```shell script
-./mvnw quarkus:dev
-```
+---
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+## 📦 Endpoints REST
 
-## Packaging and running the application
+| Método | Endpoint           | Descrição                       |
+|--------|--------------------|---------------------------------|
+| GET    | `/pagamentos`      | Lista todos os pagamentos       |
+| GET    | `/pagamentos/{id}` | Busca pagamento por ID          |
+| POST   | `/pagamentos`      | Cria um novo pagamento          |
+| PUT    | `/pagamentos/{id}` | Atualiza um pagamento existente |
+| DELETE | `/pagamentos/{id}` | Remove um pagamento por ID      |
 
-The application can be packaged using:
+---
 
-```shell script
-./mvnw package
-```
+## 📁 Estrutura do Projeto
 
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+src/ ├── main/ │ ├── java/ │ │ └── pagamentos.v1 │ │ ├── rest/ → Recursos REST │ │ ├── dto/ → Objetos de transferência │
+│ ├── entity/ → Entidades JPA │ │ ├── mapper/ → Conversão entre DTO e entidade │ │ └── service/ → Regras de negócio │
+└── resources/ │ └── application.properties
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
 
-If you want to build an _über-jar_, execute the following command:
+---
 
-```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
-```
+## ⚙️ Como Executar Localmente
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/MarcosDev1982/microservico-pagamento.git
+   cd microservico-pagamento
 
-## Creating a native executable
+Configure o banco de dados no application.properties
 
-You can create a native executable using:
+quarkus.datasource.db-kind=postgresql
+quarkus.datasource.jdbc.url=jdbc:postgresql://localhost:5432/pagamentos
+quarkus.datasource.username=seu_usuario
+quarkus.datasource.password=sua_senha
 
-```shell script
-./mvnw package -Dnative
-```
+3. Execute o projeto com Maven:
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
+   ./mvnw quarkus:dev
 
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
+📡 Documentação da AP
 
-You can then execute your native executable with: `./target/marcosfood-micoservice-pagamento-1.0-SNAPSHOT-runner`
+http://localhost:8080/q/openapi
 
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
+E a interface Swagger em:
 
-## Provided Code
+http://localhost:8080/q/swagger-ui
 
-### REST
+🛡️ Saúde da Aplicaçã
 
-Easily start your REST Web Services
+http://localhost:8080/q/health
 
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+
+
+
+
+
+
+
+
+
+
+
